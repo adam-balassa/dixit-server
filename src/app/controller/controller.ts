@@ -172,7 +172,8 @@ export class Controller {
 			game.members.forEach(m => m.score += 2);
 		else if (game.members.every(m => m.vote?.id !== correctAnswer.id))
 			game.members.forEach(m => m.score += 2);
-		else
+		else {
+			player.score += 3;
 			game.members.forEach(m => {
 				if (m.vote?.id === correctAnswer.id)
 					m.score += 3;
@@ -181,6 +182,7 @@ export class Controller {
 					votedPlayer.score++;
 				}
 			});
+		}
 	}
 
 	private generateId(): string {
