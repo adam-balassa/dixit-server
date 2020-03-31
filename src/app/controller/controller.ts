@@ -103,7 +103,8 @@ export class Controller {
 				game.round.title = title;
 				const playerIndex = game.round.number % game.members.length;
 				const player = game.members[playerIndex];
-				if (!player.hand.every(c => c.id !== card)) throw new RequestError('Player cant choose this card!');
+				console.log(player.name);
+				if (!player.hand.some(c => c.id === card)) throw new RequestError('Player cant choose this card!');
 				player.choice = { id: card };
 				await this.dal.saveData(game);
 				resolve(new Success(game));
@@ -123,7 +124,7 @@ export class Controller {
 				const player: Player | undefined = game.members.find(m => m.id === playerId);
 				if (player === undefined) throw new RequestError('Invalid playerId');
 				if (player.choice) throw new RequestError('Player has already chosen');
-				if (!player.hand.every(c => c.id !== choice)) throw new RequestError('Player cant choose this card!');
+				if (!player.hand.some(c => c.id === choice)) throw new RequestError('Player cant choose this card!');
 				player.choice = { id: choice };
 				await this.dal.saveData(game);
 				resolve(new Success(game));

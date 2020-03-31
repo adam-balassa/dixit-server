@@ -8,7 +8,7 @@ export class DataAccessLayer {
 	}
 
 	saveData(game: Game): Promise<void> {
-		return this.db.saveData(game.id, JSON.stringify(game));
+		return this.db.saveData(game.id, JSON.stringify(game, null, 2));
 	}
 
 	getData(id: string): Promise<Game> {
