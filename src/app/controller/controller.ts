@@ -168,10 +168,14 @@ export class Controller {
 		const player = game.members[playerIndex];
 		const correctAnswer: Card = player.choice!;
 
-		if (game.members.every(m => m.vote?.id === correctAnswer.id))
-			game.members.forEach(m => m.score += 2);
-		else if (game.members.every(m => m.vote?.id !== correctAnswer.id))
-			game.members.forEach(m => m.score += 2);
+		if (game.members.every(m => m.vote?.id === correctAnswer.id || m.id === player.id))
+			game.members.forEach(m => {
+				if (m.id !== player.id) m.score += 2;
+			});
+		else if (game.members.every(m => m.vote?.id !== correctAnswer.id || m.id === player.id))
+			game.members.forEach(m => {
+				if (m.id !== player.id) m.score += 2;
+			});
 		else {
 			player.score += 3;
 			game.members.forEach(m => {
