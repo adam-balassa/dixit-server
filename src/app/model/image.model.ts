@@ -14,7 +14,7 @@ class ImageReader {
 }
 
 export class DixitImage {
-	static readonly numberOfImages: number = 100;
+	static readonly numberOfImages: number = 161;
 
 	path: string = '';
 	constructor(index: number) {
