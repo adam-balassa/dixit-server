@@ -207,7 +207,8 @@ export class Controller {
 
 	private drawCard(game: Game) {
 		game.members.forEach(member => {
-			member.hand.push(game.deck.splice(0, 1)[0]);
+			if (game.deck.length)
+				member.hand.push(game.deck.splice(0, 1)[0]);
 		});
 	}
 }
